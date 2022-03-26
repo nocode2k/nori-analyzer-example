@@ -1,6 +1,6 @@
 ## nori-analyzer-example
 
-# Environment
+### Environment
 
 This example uses:
 * Gradle >= 7.1
