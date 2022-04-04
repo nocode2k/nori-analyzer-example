@@ -3,17 +3,17 @@ plugins {
 }
 
 group 'com.nocode'
-version '0.1.0-SNAPSHOT'
+version '0.2.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation 'org.apache.lucene:lucene-core:9.0.0'
-    implementation 'org.apache.lucene:lucene-analysis-common:9.0.0'
-    implementation 'org.apache.lucene:lucene-queryparser:9.0.0'
-    implementation 'org.apache.lucene:lucene-analysis-nori:9.0.0'
+    implementation 'org.apache.lucene:lucene-core:9.1.0'
+    implementation 'org.apache.lucene:lucene-analysis-common:9.1.0'
+    implementation 'org.apache.lucene:lucene-queryparser:9.1.0'
+    implementation 'org.apache.lucene:lucene-analysis-nori:9.1.0'
     implementation 'org.apache.commons:commons-lang3:3.12.0'
-    testImplementation 'org.apache.lucene:lucene-test-framework:9.0.0'
+    testImplementation 'org.apache.lucene:lucene-test-framework:9.1.0'
 }

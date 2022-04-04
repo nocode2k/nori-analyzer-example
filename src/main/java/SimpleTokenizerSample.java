@@ -4,6 +4,7 @@ import org.apache.lucene.analysis.ko.KoreanAnalyzer;
 import org.apache.lucene.analysis.ko.KoreanPartOfSpeechStopFilter;
 import org.apache.lucene.analysis.ko.KoreanTokenizer;
 import org.apache.lucene.analysis.ko.tokenattributes.PartOfSpeechAttribute;
+import org.apache.lucene.analysis.ko.tokenattributes.ReadingAttribute;
 import org.apache.lucene.analysis.tokenattributes.*;
 import java.io.IOException;
 
@@ -12,12 +13,12 @@ public class SimpleTokenizerSample {
         Analyzer analyzer =
                 new KoreanAnalyzer(
                         null,
-                        KoreanTokenizer.DecompoundMode.MIXED,
+                        KoreanTokenizer.DecompoundMode.DISCARD,
                         KoreanPartOfSpeechStopFilter.DEFAULT_STOP_TAGS,
                         false);
 
         System.out.println("=============================================================");
-        System.out.println(getKoreanAnalysisResult(analyzer, "대한민국만세"));
+        System.out.println(getKoreanAnalysisResult(analyzer, "喜悲哀歡"));
         System.out.println("=============================================================");
     }
 
@@ -29,14 +30,20 @@ public class SimpleTokenizerSample {
             PositionIncrementAttribute posIncAtt = ts.getAttribute(PositionIncrementAttribute.class);
             PositionLengthAttribute posLengthAtt = ts.getAttribute(PositionLengthAttribute.class);
             PartOfSpeechAttribute partOfSpeechAttribute = ts.getAttribute(PartOfSpeechAttribute.class);
+            ReadingAttribute readingAttribute = ts.getAttribute(ReadingAttribute.class);
             OffsetAttribute offsetAtt = ts.getAttribute(OffsetAttribute.class);
+
             ts.reset();
+
             int pos = -1;
             while (ts.incrementToken()) {
                 pos += posIncAtt.getPositionIncrement();
                 resultBuffer.append(termAtt);
                 resultBuffer.append(" at pos=");
                 resultBuffer.append(pos);
+                if (readingAttribute != null) {
+                    System.out.println(readingAttribute.getReading());
+                }
                 if (posLengthAtt != null) {
                     resultBuffer.append(" to pos=");
                     resultBuffer.append(pos + posLengthAtt.getPositionLength());
